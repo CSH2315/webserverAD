@@ -10,8 +10,16 @@ class Question(models.Model):
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_question')  # 추천인 추가
 
+    # 조회수를 의미하는 속성
+    hits = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.subject
+
+    @property
+    def increment_hit(self):
+        self.hits += 1
+        self.save()
 
 
 class Answer(models.Model):
