@@ -64,3 +64,15 @@ def answer_vote(request, answer_id):
 
     # 3-12-1-2 답변 redirect
     return redirect('{}#answer_{}'.format(resolve_url('pybo:detail', question_id=answer.question.id), answer.id))
+
+# 답변 비추천 함수
+@login_required(login_url='common:login')
+def answer_vote_nega(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user == answer.author:
+        messages.error(request, '본인이 작성한 글은 비추천할수 없습니다')
+    else:
+        answer.voter_negative.add(request.user)
+
+    # 3-12-1-2 답변 redirect
+    return redirect('{}#answer_{}'.format(resolve_url('pybo:detail', question_id=answer.question.id), answer.id))

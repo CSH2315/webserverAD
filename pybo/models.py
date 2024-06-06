@@ -13,6 +13,9 @@ class Question(models.Model):
     # 조회수를 의미하는 속성
     hits = models.PositiveIntegerField(default=0)
 
+    # 질문 비추천 추가
+    voter_negative = models.ManyToManyField(User, related_name='voter_question_nega')
+
     def __str__(self):
         return self.subject
 
@@ -29,3 +32,6 @@ class Answer(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_answer')
+
+    # 답변 비추천 추가
+    voter_negative = models.ManyToManyField(User, related_name='voter_answer_nega')
