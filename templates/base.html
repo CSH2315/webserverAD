@@ -28,9 +28,6 @@
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const darkModeCss = document.getElementById('dark-mode-css');
 
-        // Log initial state
-        console.log('Initial dark mode setting:', localStorage.getItem('dark-mode'));
-
         // Load the dark mode setting from local storage
         if (localStorage.getItem('dark-mode') === 'enabled') {
             darkModeCss.disabled = false;
@@ -38,17 +35,14 @@
         }
 
         darkModeToggle.addEventListener('click', () => {
-            console.log('Dark mode toggle clicked');
             if (darkModeCss.disabled) {
                 darkModeCss.disabled = false;
                 darkModeToggle.innerText = '라이트 모드 전환';
                 localStorage.setItem('dark-mode', 'enabled');
-                console.log('Dark mode enabled');
             } else {
                 darkModeCss.disabled = true;
                 darkModeToggle.innerText = '다크 모드 전환';
                 localStorage.setItem('dark-mode', 'disabled');
-                console.log('Dark mode disabled');
             }
         });
     });

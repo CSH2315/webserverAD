@@ -48,6 +48,7 @@
                 <a href="{% url 'pybo:question_modify' question.id  %}" class="btn btn-sm btn-outline-secondary" style="color: #777777;">수정</a>
                 <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'pybo:question_delete' question.id  %}" style="color: #777777;">삭제</a>
                 {% endif %}
+                <span class="text-card">조회수 : {{ question.hits }}</span> <!-- 조회수 표시 -->
             </div>
         </div>
     </div>
