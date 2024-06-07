@@ -19,7 +19,6 @@ class Question(models.Model):
     def __str__(self):
         return self.subject
 
-    @property
     def increment_hit(self):
         self.hits += 1
         self.save()
