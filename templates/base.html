@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- Bootswatch Darkly Theme CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet" id="dark-mode-css" disabled>
     <!-- pybo CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <title>Hello, pybo!</title>
@@ -14,6 +16,7 @@
 <body>
 <!-- 네비게이션바 -->
 {% include "navbar.html" %}
+<button id="dark-mode-toggle" class="btn btn-primary">다크 모드 전환</button>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 {% block content %}
 {% endblock %}
@@ -22,7 +25,40 @@
 <script src="{% static 'bootstrap.min.js' %}"></script>
 <!-- 자바스크립트 Start -->
 {% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const darkModeCss = document.getElementById('dark-mode-css');
+
+        // Log initial state
+        console.log('Initial dark mode setting:', localStorage.getItem('dark-mode'));
+
+        // Load the dark mode setting from local storage
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            darkModeCss.disabled = false;
+            darkModeToggle.innerText = '라이트 모드 전환';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            console.log('Dark mode toggle clicked');
+            if (darkModeCss.disabled) {
+                darkModeCss.disabled = false;
+                darkModeToggle.innerText = '라이트 모드 전환';
+                localStorage.setItem('dark-mode', 'enabled');
+                console.log('Dark mode enabled');
+            } else {
+                darkModeCss.disabled = true;
+                darkModeToggle.innerText = '다크 모드 전환';
+                localStorage.setItem('dark-mode', 'disabled');
+                console.log('Dark mode disabled');
+            }
+        });
+    });
+</script>
 {% endblock %}
 <!-- 자바스크립트 End -->
 </body>
 </html>
+
+
+
